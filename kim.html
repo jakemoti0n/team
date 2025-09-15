@@ -1,11 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>깃마스터 자기소개</title>
+  <style>
+    /* 전체 레이아웃 */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: linear-gradient(to right, #6dd5ed, #2193b0);
+      color: #333;
+    }
+
+    /* 컨테이너 */
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* 애니메이션 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 헤더 */
+    h1 {
+      text-align: center;
+      color: #2193b0;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #444;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+
+    /* 프로필 사진 */
+    .profile-pic {
+      display: block;
+      margin: 0 auto 20px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #2193b0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 리스트 */
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li::before {
+      content: "✔ ";
+      color: #2193b0;
+    }
+
+    /* 버튼 */
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #2193b0;
+      color: #fff;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #17627d;
+    }
+  </style>
 </head>
 <body>
-    <h2>김태준입니다</h2>
+  <div class="container">
+    <img src="https://i.namu.wiki/i/1z7llxatv3X3qFOaosCGdt2k31oU_l-MLH90Vfx41yJ14dMU7jbgLKr2rFBmNNw-2ZpAEZ4AFG2rgkKvCMYb4w.webp" alt="프로필 사진" class="profile-pic">
+    <h1>김태준</h1>
+    <p style="text-align:center;">안녕하세요! 팀의 깃창마스터 김태준입니다.</p>
+
+    <h2>👤 소개</h2>
+    <p>
+      저는 팀의 깃마스터입니다.  
+    </p>
+
+    <h2>🎯 기술 스택</h2>
+    <ul>
+      <li>패시브 전장의 군가 / Q용의일격 / W황금빛 방패/ E데마시아의깃발/ R대격변</li>
+      </ul>
+
+    <h2>📞 데마시아</h2>
+    <p>Email: jarvan IV@demacia.com</p>
+    <p>GitHub: <a href="https://namu.wiki/w/%EC%9E%90%EB%A5%B4%EB%B0%98%204%EC%84%B8" target="_blank">github.com/username</a></p>
+
+    <a href="#" class="btn">프로젝트 보러가기</a>
+  </div>
 </body>
 </html>
