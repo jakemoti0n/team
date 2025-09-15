@@ -3,113 +3,564 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>박윤찬 자기소개</title>
+  <title>박윤찬 - AI Developer</title>
   <style>
-    /* 전체 레이아웃 */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      line-height: 1.6;
-      background: linear-gradient(to right, #6dd5ed, #2193b0);
-      color: #333;
+      box-sizing: border-box;
     }
 
-    /* 컨테이너 */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(270deg, #667eea, #764ba2, #f093fb, #f5576c);
+      background-size: 800% 800%;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 파티클 배경 */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(-100px) rotate(180deg); opacity: 1; }
+    }
+
+    /* 메인 컨테이너 */
     .container {
-      max-width: 800px;
-      margin: 50px auto;
-      background: #fff;
-      border-radius: 12px;
-      padding: 40px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      animation: fadeIn 1s ease-in-out;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* 애니메이션 */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 헤더 */
-    h1 {
+    /* 헤더 섹션 */
+    .header {
       text-align: center;
-      color: #2193b0;
-      margin-bottom: 10px;
+      padding: 60px 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: translateY(50px);
+      opacity: 0;
+      animation: slideUp 1s ease 0.5s forwards;
     }
 
-    h2 {
-      color: #444;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 5px;
+    @keyframes slideUp {
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .profile-pic {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin: 0 auto 30px;
+      display: block;
+      border: 6px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      transition: all 0.5s ease;
+      cursor: pointer;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    }
+
+    .name {
+      font-size: 3.5em;
+      font-weight: bold;
+      color: white;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.3); }
+      to { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 255, 255, 0.6); }
+    }
+
+    .subtitle {
+      font-size: 1.4em;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 20px;
+    }
+
+    .typing-text {
+      font-size: 1.2em;
+      color: rgba(255, 255, 255, 0.8);
+      min-height: 30px;
+    }
+
+    /* 섹션 카드들 */
+    .section {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 40px;
+      margin-bottom: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: translateX(-100px);
+      opacity: 0;
+      transition: all 0.8s ease;
+    }
+
+    .section.visible {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .section:nth-child(even) {
+      transform: translateX(100px);
+    }
+
+    .section:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .section h2 {
+      font-size: 2.2em;
+      color: white;
+      margin-bottom: 25px;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.1em;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    /* 스킬 카드들 */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px) scale(1.05);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .skill-card h3 {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 1.3em;
+    }
+
+    .skill-card p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.95em;
+      margin: 0;
+    }
+
+    /* 프로그레스 바 */
+    .progress-container {
+      margin: 15px 0;
+    }
+
+    .progress-label {
+      color: white;
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      border-radius: 6px;
+      width: 0%;
+      transition: width 2s ease;
+      position: relative;
+    }
+
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    /* 연락처 버튼들 */
+    .contact-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
       margin-top: 30px;
     }
 
-    /* 프로필 사진 */
-    .profile-pic {
-      display: block;
-      margin: 0 auto 20px;
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #2193b0;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 리스트 */
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul li::before {
-      content: "✔ ";
-      color: #2193b0;
-    }
-
-    /* 버튼 */
     .btn {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: #2193b0;
-      color: #fff;
-      border-radius: 25px;
+      padding: 15px 30px;
+      border-radius: 50px;
       text-decoration: none;
-      transition: background 0.3s;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transition: all 0.5s ease;
+      transform: translate(-50%, -50%);
+    }
+
+    .btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     .btn:hover {
-      background: #17627d;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* 반응형 */
+    @media (max-width: 768px) {
+      .name { font-size: 2.5em; }
+      .section { padding: 25px; margin: 20px 10px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .contact-buttons { flex-direction: column; align-items: center; }
+    }
+
+    /* 스크롤 인디케이터 */
+    .scroll-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      z-index: 1000;
+    }
+
+    .scroll-progress {
+      height: 100%;
+      background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      width: 0%;
+      transition: width 0.3s ease;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="https://www.genetec.com/binaries/content/gallery/genetecweb/externalupload/webgraphic_putting-ai-to-work-blog-2024.png" alt="프로필 사진" class="profile-pic">
-    <h1>박윤찬</h1>
-    <p style="text-align:center;">안녕하세요! AI서비스에 관심 있는 개발자 지망생입니다.</p>
-
-    <h2>👤 소개</h2>
-    <p>
-      저는 AI 엔지니어로서, AI 서비스 개발에 관심이 많습니다.  
-      다양한 프로젝트를 하며 AI를 사용한 사회문제 해결에 열정을 가지고 있습니다.
-    </p>
-
-    <h2>🎯 기술 스택</h2>
-    <ul>
-      <li>TensorFlow / Pytorch / Scikit-learn</li>
-      <li>Java & Spring</li>
-      <li>LangChain & LangGraph</li>
-    </ul>
-
-    <h2>📞 연락처</h2>
-    <p>Email: parkyunchan6209@email.com</p>
-    <p>GitHub: <a href="https://github.com/username" target="_blank">github.com/username</a></p>
-
-    <a href="#" class="btn">프로젝트 보러가기</a>
+  <!-- 스크롤 인디케이터 -->
+  <div class="scroll-indicator">
+    <div class="scroll-progress" id="scrollProgress"></div>
   </div>
+
+  <!-- 파티클 배경 -->
+  <div class="particles" id="particles"></div>
+
+  <div class="container">
+    <!-- 헤더 -->
+    <div class="header">
+      <img src="https://www.genetec.com/binaries/content/gallery/genetecweb/externalupload/webgraphic_putting-ai-to-work-blog-2024.png" 
+           alt="박윤찬 프로필" class="profile-pic" id="profilePic">
+      <h1 class="name">박윤찬</h1>
+      <p class="subtitle">AI Developer & Problem Solver</p>
+      <div class="typing-text" id="typingText"></div>
+    </div>
+
+    <!-- 소개 섹션 -->
+    <div class="section">
+      <h2>🚀 About Me</h2>
+      <p>
+        안녕하세요! 저는 AI 기술을 통해 세상을 더 나은 곳으로 만들고 싶은 개발자입니다. 
+        머신러닝과 딥러닝을 활용한 혁신적인 솔루션 개발에 열정을 가지고 있으며, 
+        특히 사회적 가치를 창출하는 AI 서비스에 관심이 많습니다.
+      </p>
+    </div>
+
+    <!-- 기술 스택 -->
+    <div class="section">
+      <h2>💻 Tech Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>🤖 AI/ML</h3>
+          <p>TensorFlow, PyTorch, Scikit-learn을 활용한 머신러닝 모델 개발</p>
+        </div>
+        <div class="skill-card">
+          <h3>☕ Backend</h3>
+          <p>Java & Spring Framework를 이용한 견고한 서버 개발</p>
+        </div>
+        <div class="skill-card">
+          <h3>🔗 LangChain</h3>
+          <p>LangChain & LangGraph로 구축하는 지능형 AI 애플리케이션</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <div class="progress-container">
+          <span class="progress-label">Python & AI/ML</span>
+          <div class="progress-bar">
+            <div class="progress-fill" data-width="85"></div>
+          </div>
+        </div>
+        <div class="progress-container">
+          <span class="progress-label">Java & Spring</span>
+          <div class="progress-bar">
+            <div class="progress-fill" data-width="75"></div>
+          </div>
+        </div>
+        <div class="progress-container">
+          <span class="progress-label">LangChain/LangGraph</span>
+          <div class="progress-bar">
+            <div class="progress-fill" data-width="80"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 목표 & 비전 -->
+    <div class="section">
+      <h2>🎯 Vision</h2>
+      <p>
+        AI 기술이 단순한 도구를 넘어 인류의 삶을 근본적으로 개선하는 솔루션이 되어야 한다고 믿습니다. 
+        지속 가능하고 윤리적인 AI 개발을 통해 모든 사람이 기술의 혜택을 누릴 수 있는 세상을 만들어가고 싶습니다.
+      </p>
+    </div>
+
+    <!-- 연락처 -->
+    <div class="section">
+      <h2>📞 Contact</h2>
+      <p style="text-align: center; margin-bottom: 0;">함께 멋진 프로젝트를 만들어가고 싶다면 언제든 연락주세요!</p>
+      <div class="contact-buttons">
+        <a href="mailto:parkyunchan6209@email.com" class="btn">
+          <span>📧 Email</span>
+        </a>
+        <a href="#" class="btn" id="projectBtn">
+          <span>🔗 Projects</span>
+        </a>
+        <a href="#" class="btn">
+          <span>📱 GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 타이핑 애니메이션
+    const typingText = document.getElementById('typingText');
+    const phrases = [
+      "AI로 세상을 바꾸는 개발자 💡",
+      "혁신적인 솔루션을 만드는 엔지니어 🚀",
+      "사회 문제를 해결하는 기술자 🌍",
+      "미래를 코딩하는 비전가 ✨"
+    ];
+    
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    
+    function typeWriter() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+      
+      let typeSpeed = isDeleting ? 50 : 100;
+      
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+      }
+      
+      setTimeout(typeWriter, typeSpeed);
+    }
+    
+    typeWriter();
+
+    // 파티클 생성
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 6 + 's';
+        particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    createParticles();
+
+    // 스크롤 애니메이션
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+
+    // 프로그레스 바 애니메이션
+    setTimeout(() => {
+      document.querySelectorAll('.progress-fill').forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width + '%';
+      });
+    }, 1000);
+
+    // 스크롤 진행률
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.getElementById('scrollProgress');
+      const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
+    });
+
+    // 프로필 사진 클릭 이벤트
+    document.getElementById('profilePic').addEventListener('click', () => {
+      alert('안녕하세요! 박윤찬입니다 👋');
+    });
+
+    // 프로젝트 버튼 클릭 이벤트
+    document.getElementById('projectBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('곧 멋진 프로젝트들을 공개할 예정입니다! 🚀');
+    });
+
+    // 마우스 따라다니는 효과
+    document.addEventListener('mousemove', (e) => {
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      
+      // 새로운 파티클 생성 (간헐적으로)
+      if (Math.random() < 0.1) {
+        const particle = document.createElement('div');
+        particle.style.cssText = `
+          position: fixed;
+          width: 6px;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.6);
+          border-radius: 50%;
+          left: ${mouseX}px;
+          top: ${mouseY}px;
+          pointer-events: none;
+          z-index: 1000;
+          animation: fadeOut 2s ease-out forwards;
+        `;
+        
+        document.body.appendChild(particle);
+        
+        setTimeout(() => {
+          particle.remove();
+        }, 2000);
+      }
+    });
+
+    // fadeOut 애니메이션 추가
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOut {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0) translateY(-50px); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
